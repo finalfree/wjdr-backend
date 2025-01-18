@@ -3,6 +3,7 @@ package main
 import (
 	"time"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
@@ -18,6 +19,9 @@ type User struct {
 
 func main() {
 	r := gin.Default()
+
+	r.Use(cors.Default())
+
 	db, err := gorm.Open(sqlite.Open("test.db"), &gorm.Config{})
 	if err != nil {
 		panic("failed to connect database")
